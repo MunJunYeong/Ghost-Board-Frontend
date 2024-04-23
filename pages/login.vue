@@ -1,3 +1,8 @@
+<script lang="ts">
+export default {};
+</script>
+
+
 <template>
   <section>
     <v-btn> Button </v-btn>
@@ -5,8 +10,6 @@
   </section>
 </template>
 
-<script>
-export default {};
-</script>
+
 
 <style lang="scss" scoped></style>
