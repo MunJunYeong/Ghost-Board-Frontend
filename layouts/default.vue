@@ -1,12 +1,12 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <div class="ml-8 w-40"><v-img src="/public/logo.svg"></v-img></div>
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container class="w-full h-full">
         <slot></slot>
       </v-container>
     </v-main>

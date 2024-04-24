@@ -1,10 +1,12 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
+  css: ["~/assets/css/tailwind.css"],
   //...
   typescript: {
     typeCheck: true
   },
   build: {
+    
     transpile: ['vuetify'],
   },
   modules: ["@nuxt/eslint", (_options, nuxt) => {
@@ -12,7 +14,7 @@ export default defineNuxtConfig({
       // @ts-expect-error
       config.plugins.push(vuetify({ autoImport: true }))
     })
-  },],
+  },'@nuxtjs/tailwindcss'],
   vite: {
     vue: {
       template: {
