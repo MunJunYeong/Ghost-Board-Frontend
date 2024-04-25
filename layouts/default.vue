@@ -1,4 +1,5 @@
 <template>
+  <!-- 반응형 추가 -->
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
       <div class="ml-8 w-40"><v-img src="/public/logo.svg"></v-img></div>
@@ -19,6 +20,7 @@
       :clipped="clipped"
     >
       <v-list>
+        <!-- TODO: Nuxt link로 바꿀것 -->
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
