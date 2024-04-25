@@ -1,4 +1,12 @@
 {
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "baseUrl": ".",
+      "paths": {
+        "~/*": ["src/*"]
+      }
+      // 다른 옵션들...
+  },
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json"
 }

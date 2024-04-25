@@ -43,34 +43,6 @@
     </v-footer>
   </v-app>
 </template>
-<!-- <template>
-  <v-card>
-    <v-layout>
-      <v-navigation-drawer
-        location="right"
-        permanent
-      >
-        <template v-slot:prepend>
-          <v-list-item
-            lines="two"
-            prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
-            subtitle="Logged in"
-            title="Jane Smith"
-          ></v-list-item>
-        </template>
-
-        <v-divider></v-divider>
-
-        <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
-          <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-      <v-main style="height: 100%"><slot></slot></v-main>
-    </v-layout>
-  </v-card>
-</template> -->
 
 <script>
 export default {
@@ -88,13 +60,18 @@ export default {
         },
         {
           icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
+          title: "Board",
+          to: "/board",
         },
         {
           icon: "mdi-login",
-          title: "Login",
+          title: "로그인",
           to: "/login",
+        },
+        {
+          icon: "mdi-acount",
+          title: "회원가입",
+          to: "/signup",
         }
       ],
       miniVariant: false,
