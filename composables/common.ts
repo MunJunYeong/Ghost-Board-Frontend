@@ -1,10 +1,10 @@
 import type { UseFetchOptions } from "nuxt/app";
 
+// generic T 에 return 타입 넣어줄 것
 export async function useCustomFetch<T>(
   url: string | (() => string),
   options: UseFetchOptions<T> = {}
 ) {
-
   const userAuth = useCookie("accessToken");
   const config = useRuntimeConfig()
   const customFetch = $fetch.create({
@@ -14,23 +14,17 @@ export async function useCustomFetch<T>(
         options.headers = {Authorization: `Bearer ${userAuth.value}`};
       }
     },
+    // 에러처리 로직 추가
     onResponseError({ response }) {
       if (response.status === 401) {
         return navigateTo("/");
       }
     },
     onResponse({response}){
-      console.log(response)
+      // console.log(response)
   }});
   return await useFetch(url, {
     ...options,
     $fetch: customFetch,
-  });
-}
-
-export async function login(data: {id:string, password:string}) {
-  return await useCustomFetch<{data:{accessToken:string, refreshToken: string}, message:string}>("/login", {
-    method: "POST",
-    body: data,
   });
 }

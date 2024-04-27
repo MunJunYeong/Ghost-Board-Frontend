@@ -9,6 +9,8 @@
     <v-main>
       <v-container class="w-full h-full">
         <slot></slot>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
+
       </v-container>
     </v-main>
     <v-navigation-drawer
@@ -38,9 +40,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -51,7 +50,7 @@ export default {
     return {
       clipped: false,
       drawer: false,
-      fixed: false,
+      fixed: true,
       items: [
         {
           icon: "mdi-apps",
