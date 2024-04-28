@@ -5,53 +5,52 @@ let email: string;
 let username: string;
 let code: string;
 let isMailSend: boolean = false;
-let isCheckedUsername: boolean;
-let isCheckedEmail: boolean;
+let isCheckedUsername = ref(false);
+let isCheckedEmail = ref(false);
 
 // 우선 custom fetch 로직만 분리해 놓았음 추가로 API에 대한 모듈화 진행해야함.
 async function Signup() {
-  const {data, error} = await useSignup({ id, email, password, username });
-  if(data.value){
+  const { data, error } = await useSignup({ id, email, password, username });
+  if (data.value) {
     return navigateTo("/");
   }
-  if(error.value){
-    console.log('실패함')
+  if (error.value) {
+    console.log("실패함");
   }
-
 }
 async function sendEmail() {
   const { data, error } = await useSendEmail({ email });
   // 알림 띄워주는 작업 추가해야 함.
   if (data.value) {
     isMailSend = true;
-    console.log('성공이요')
+    console.log("성공이요");
   }
-  
+
   // 에러 알림 띄워주는 작업 추가해야 함.
   if (error.value) {
     console.log("실패함");
   }
 }
 async function checkEmail() {
-  const {data, error} = await useCheckEmail({ email, code });
+  const { data, error } = await useCheckEmail({ email, code });
   if (data.value) {
-    isCheckedEmail = true
+    isCheckedEmail.value = true;
   }
-  
+
   // 에러 알림 띄워주는 작업 추가해야 함.
   if (error.value) {
-    isCheckedEmail = false
+    isCheckedEmail.value = false;
   }
 }
 async function checkUserName() {
-  const {data, error} = await useCheckUserName({ username });
+  const { data, error } = await useCheckUserName({ username });
   if (data.value) {
-    isCheckedUsername = true
+    isCheckedUsername.value = true;
   }
-  
+
   // 에러 알림 띄워주는 작업 추가해야 함.
   if (error.value) {
-    isCheckedUsername = false
+    isCheckedUsername.value = false;
   }
 }
 </script>
@@ -112,12 +111,12 @@ async function checkUserName() {
           text="확인"
         ></ButtonBasic>
       </div>
-
       <div class="flex h-12">
         <ButtonBasic
           type="submit"
           text="회원가입"
-          :fullWidth=true
+          :fullWidth="true"
+          :disabled="!isCheckedEmail || !isCheckedUsername"
         ></ButtonBasic>
       </div>
     </form>

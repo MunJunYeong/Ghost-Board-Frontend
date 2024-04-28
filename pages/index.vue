@@ -1,8 +1,7 @@
 <template>
     <section>
-      <p class="text-red-500">This page will be displayed at the index route.</p>
-      <div class="border-2 text-7xl">ssssss</div>
-      <button v-on:click="logOut">sssssssssssssssssssssssssssssssssssssssssss</button>
+      <p class="text-red-500">TODO: This page is main page.</p>
+      <button v-on:click="logOut">로그아웃</button>
     </section>
   </template>
 

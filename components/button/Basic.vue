@@ -2,6 +2,7 @@
     <button
       type="submit"
       v-on:click="onClick"
+      :disabled="disabled"
       class="bg-emerald-300 text-white  py-2 px-2 rounded-md"
       :class="{ 'w-full' : fullWidth, 'hover:bg-aquamarine-dark' : hoverable }"
     >
@@ -10,22 +11,17 @@
   </template>
   
   <script setup lang="ts">
-  import { defineProps, ref } from 'vue';
+  import { defineProps } from 'vue';
   
-  const props = defineProps({
+  defineProps({
     text: String,
     onClick: Function,
     fullWidth: { type: Boolean, default: false },
     hoverable: { type: Boolean, default: true },
+    disabled: { type: Boolean, default: false },
   });
   
   const emit = defineEmits(['click']);
   
-  const onClickHandler = () => {
-    emit('click');
-    if (props.onClick) {
-      props.onClick();
-    }
-  };
   </script>
   

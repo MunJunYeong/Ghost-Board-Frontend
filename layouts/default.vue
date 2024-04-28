@@ -2,16 +2,16 @@
   <!-- 반응형 추가 -->
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <div class="ml-8 w-40"><v-img src="/public/logo.svg"></v-img></div>
+      <NuxtLink to="/" class="ml-8 w-40"><v-img src="/public/logo.svg"></v-img></NuxtLink>
       <v-spacer></v-spacer>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
-    <v-main>
-      <v-container class="w-full h-full">
+    <v-main class="w-full h-full flex flex-col">
+      <v-container class='flex-1'>
         <slot></slot>
-      <div>&copy; {{ new Date().getFullYear() }}</div>
-
+        
       </v-container>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
     </v-main>
     <v-navigation-drawer
       location="right"
@@ -53,30 +53,25 @@ export default {
       fixed: true,
       items: [
         {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Board",
-          to: "/board",
-        },
-        {
           icon: "mdi-login",
           title: "로그인",
           to: "/login",
         },
         {
-          icon: "mdi-acount",
+          icon: "mdi-account",
           title: "회원가입",
           to: "/signup",
-        }
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Board",
+          to: "/board/0/post",
+        },
       ],
       miniVariant: false,
       right: false,
       rightDrawer: false,
-      title: "Vuetify.js",
+      title: "Core 실록",
     };
   },
 };

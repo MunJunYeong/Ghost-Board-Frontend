@@ -1,12 +1,14 @@
+import type { ResponseCommon } from "./common";
+
 export interface ReqBoards {
-    query: string
+    nextCursor?: number
 }
 export interface ResBoards {
 
 }
 
-export interface ReqBoards {}
-export interface ResBoards {}
+// export interface ReqBoards {nextCursor:string}
+export interface ResBoards extends ResponseCommon<{posts:any[], nextCursor:number}>{}
 
 export interface ReqBoards {}
 export interface ResBoards {}
