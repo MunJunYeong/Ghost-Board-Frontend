@@ -7,28 +7,35 @@ let code: string;
 let isMailSend: boolean = false;
 let isCheckedUsername = ref(false);
 let isCheckedEmail = ref(false);
-
-// 우선 custom fetch 로직만 분리해 놓았음 추가로 API에 대한 모듈화 진행해야함.
-async function Signup() {
-  const { data, error } = await useSignup({ id, email, password, username });
+let errorMessage = ref("");
+let isSendingMail = ref(false);
+async function checkUserName() {
+  const { data, error } = await useCheckUserName({ username });
   if (data.value) {
-    return navigateTo("/");
-  }
-  if (error.value) {
-    console.log("실패함");
-  }
-}
-async function sendEmail() {
-  const { data, error } = await useSendEmail({ email });
-  // 알림 띄워주는 작업 추가해야 함.
-  if (data.value) {
-    isMailSend = true;
-    console.log("성공이요");
+    isCheckedUsername.value = true;
   }
 
   // 에러 알림 띄워주는 작업 추가해야 함.
   if (error.value) {
-    console.log("실패함");
+    isCheckedUsername.value = false;
+    errorMessage.value = error.value.data.message;
+    return;
+  }
+}
+
+async function sendEmail() {
+  const { data, error, pending } = await useSendEmail({ email });
+  // 알림 띄워주는 작업 추가해야 함.
+  if (data.value) {
+    isSendingMail.value = false;
+    isMailSend = true;
+  }
+
+  // 에러 알림 띄워주는 작업 추가해야 함.
+  if (error.value) {
+    isSendingMail.value = false;
+    errorMessage.value = error.value.data.message;
+    return;
   }
 }
 async function checkEmail() {
@@ -40,17 +47,19 @@ async function checkEmail() {
   // 에러 알림 띄워주는 작업 추가해야 함.
   if (error.value) {
     isCheckedEmail.value = false;
+    errorMessage.value = error.value.data.message;
+    return;
   }
 }
-async function checkUserName() {
-  const { data, error } = await useCheckUserName({ username });
-  if (data.value) {
-    isCheckedUsername.value = true;
-  }
 
-  // 에러 알림 띄워주는 작업 추가해야 함.
+async function Signup() {
+  const { data, error } = await useSignup({ id, email, password, username });
+  if (data.value) {
+    return navigateTo("/");
+  }
   if (error.value) {
-    isCheckedUsername.value = false;
+    errorMessage.value = error.value.data.message;
+    return;
   }
 }
 </script>
@@ -72,7 +81,7 @@ async function checkUserName() {
         <ButtonBasic
           type="button"
           :onClick="() => checkUserName()"
-          text="확인"
+          :text="isCheckedUsername ? '✅확인' : '확인'"
         ></ButtonBasic>
       </div>
       <!-- id -->
@@ -96,7 +105,7 @@ async function checkUserName() {
         <ButtonBasic
           type="button"
           :onClick="() => sendEmail()"
-          text="전송"
+          :text="isMailSend ? '✅전송' : '전송'"
         ></ButtonBasic>
       </div>
       <div :v-if="isMailSend" class="flex w-full justify-between gap-2">
@@ -108,7 +117,7 @@ async function checkUserName() {
         <ButtonBasic
           type="button"
           :onClick="() => checkEmail()"
-          text="확인"
+          :text="isCheckedEmail ? '✅확인' : '확인'"
         ></ButtonBasic>
       </div>
       <div class="flex h-12">
@@ -119,6 +128,8 @@ async function checkUserName() {
           :disabled="!isCheckedEmail || !isCheckedUsername"
         ></ButtonBasic>
       </div>
+      <!-- Error 알림 -->
+      <ErrorAlert :description="errorMessage" />
     </form>
   </section>
 </template>

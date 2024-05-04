@@ -36,14 +36,11 @@ const { data: post } = await useCustomFetch<{
   message: any;
 }>("/boards/1/posts", {});
 
-console.log(post)
 let nextCursor = ref(post.value?.data.nextCursor!);
 let postList = ref(post.value?.data.posts!);
 
 async function loadData() {
   const { data: post } = await getPostList({boardId: 1 ,nextCursor: nextCursor.value})
-  // console.log(post,'postpost')
-  // console.log(post.value?.data.nextCursor,'akldsj;lask;djaklsdj')
   nextCursor.value = post.value?.data.nextCursor!;
   postList.value = [...postList.value, ...post.value?.data.posts!];
 }
