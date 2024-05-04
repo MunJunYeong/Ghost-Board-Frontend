@@ -3,10 +3,15 @@
       "moduleResolution": "node",
       "baseUrl": ".",
       "paths": {
-        "~/*": ["src/*"]
-      }
+        "~/*": ["src/*"],
+        "@/*": ["src/*"],
+        "#imports": [".nuxt/imports.d.ts"]
+      },
+      "resolveJsonModule": true,
+		  "noImplicitAny": false,
       // 다른 옵션들...
-  },
+    },
+  "exclude": ["node_modules"],
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json"
 }

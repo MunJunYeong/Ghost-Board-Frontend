@@ -55,12 +55,12 @@ export default {
         {
           icon: "mdi-login",
           title: "로그인",
-          to: "/login",
+          to: "/auth/login",
         },
         {
           icon: "mdi-account",
           title: "회원가입",
-          to: "/signup",
+          to: "/auth/signup",
         },
         {
           icon: "mdi-chart-bubble",

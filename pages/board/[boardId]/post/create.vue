@@ -1,24 +1,24 @@
 <script setup lang="ts">
-
-
 definePageMeta({
   middleware: ["auth"],
 });
-let title:string
-let content:string
-let image:any
-function onDrop (item:any) {
-  console.log(item)
-  image = item.target.files[0]
-  console.log(',ssssssssssss', image)
+let title: string;
+let content: string;
+let image: any;
+function onDrop(item: any) {
+  image = item.target.files[0];
 }
 
-async function Signup() {
-  console.log("시도");
-  const { data, error } = await createPost({ body: {content, title, image},  boardId:1});
-  console.log(data)
+async function CreatePost() {
+  const { data, error } = await createPost({
+    body: { content, title, image },
+    boardId: 1,
+  });
+  if (data.value) {
+    console.log("성공");
+  }
   if (error.value) {
-    console.log("실패함");
+    console.log("실패");
   }
 }
 // board 생성기 주석풀고 새로고침 하면 됨
@@ -40,8 +40,6 @@ async function Signup() {
 //     },
 //   }
 // );
-
-
 </script>
 
 <template>
@@ -49,20 +47,20 @@ async function Signup() {
     class="w-full h-full items-center justify-center justify-items-center flex"
   >
     <div class="flex flex-col gap-2">
-      <div class="text-4xl font-bold w-full text-center"> TOOD: 보드 작성 페이지</div>
-      <input type="text" class="border" v-model="title"/>
+      <div class="text-4xl font-bold w-full text-center">
+        TOOD: 보드 작성 페이지
+      </div>
+      <input type="text" class="border" v-model="title" />
       <textarea type="text" class="border" v-model="content">ssss</textarea>
       <div>
         <input
-            type="file"
-            :value="image"
-            ref="upload"
-            @input="onDrop($event)" 
-          /> 
+          type="file"
+          :value="image"
+          ref="upload"
+          @input="onDrop($event)"
+        />
       </div>
     </div>
-    <button :onclick="Signup">ssssssssssssss</button>
-
-
+    <button :onclick="CreatePost">ssssssssssssss</button>
   </section>
 </template>
