@@ -1,37 +1,27 @@
 import type { ResponseCommon } from "./common";
 
-export interface ReqGetPosts {
-    boardId: number
-    nextCursor?: number
+export interface ReqGetPostList {
+  boardId: number;
+  nextCursor?: number;
 }
-export interface ResGetPosts {
+export interface ResGetPostList
+  extends ResponseCommon<{ posts: any[]; nextCursor: number }> {}
 
+export interface ReqGetPost {
+  boardId: number;
+  postId: number;
 }
+export interface ResGetPost extends ResponseCommon<{}> {}
 
-// export interface ReqBoards {nextCursor:string}
-export interface ResBoards extends ResponseCommon<{posts:any[], nextCursor:number}>{}
+export interface ReqCreatePost {
+  boardId: number;
+  body: {
+    content: string;
+    title: string;
+    image: File;
+  }
+}
+export interface ResCreatePost extends ResponseCommon<{}> {}
 
-export interface ReqBoards {}
-export interface ResBoards {}
-
-export interface ReqBoards {}
-export interface ResBoards {}
-
-// export async function getBoard(data: ReqSendEmail) {
-//   return await useCustomFetch<ResSendEmail>("/signup/send-email", {
-//     method: "POST",
-//     body: data,
-//   });
-// }
-// export async function addBoard(data: ReqCheckEmail) {
-//   return await useCustomFetch<ResCheckEmail>("/signup/check-email", {
-//     method: "POST",
-//     body: data,
-//   });
-// }
-// export async function deleeteBoard(data: ReqCheckUserName) {
-//   return await useCustomFetch<ResCheckUserName>("/signup/check-username", {
-//     method: "POST",
-//     body: data,
-//   });
-// }
+export interface ReqDeletePost {}
+export interface ResDeletePost extends ResponseCommon<{}> {}

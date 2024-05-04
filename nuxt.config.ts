@@ -9,7 +9,12 @@ export default defineNuxtConfig({
     
     transpile: ['vuetify'],
   },
-  modules: ["@nuxt/eslint", '@nuxtjs/tailwindcss', "vuetify-nuxt-module"],
+  modules: [
+    "@nuxt/eslint",
+    '@nuxtjs/tailwindcss',
+    "vuetify-nuxt-module",
+    "@nuxt/image"
+  ],
   vite: {
     vue: {
       template: {

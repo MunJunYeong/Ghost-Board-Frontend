@@ -5,13 +5,14 @@ export async function useCustomFetch<T>(
   url: string | (() => string),
   options: UseFetchOptions<T> = {}
 ) {
+  console.log(options,' 옵션임')
   const userAuth = useCookie("accessToken");
-  const config = useRuntimeConfig()
+  const config = useRuntimeConfig();
   const customFetch = $fetch.create({
     baseURL: config.public.apiBase ?? "https://api.nuxt.com",
     onRequest({ request, options, error }) {
       if (userAuth.value) {
-        options.headers = {Authorization: `Bearer ${userAuth.value}`};
+        options.headers = { Authorization: `Bearer ${userAuth.value}`};
       }
     },
     // 에러처리 로직 추가
@@ -20,10 +21,12 @@ export async function useCustomFetch<T>(
         return navigateTo("/");
       }
     },
-    onResponse({response}){
+    onResponse({ response }) {
       // console.log(response)
-  }});
+    },
+  });
   return await useFetch(url, {
+    
     ...options,
     $fetch: customFetch,
   });

@@ -1,36 +1,16 @@
 import type { ResponseCommon } from "./common";
 
-export interface ReqBoards {
+export interface ReqGetBoardList {
+    boardId: number
     nextCursor?: number
 }
-export interface ResBoards {
+export interface ResGetBoardList extends ResponseCommon<{posts:any[], nextCursor:number}>{}
 
-}
+export interface ReqBoard {}
+export interface ResBoard extends ResponseCommon<{}>{}
 
-// export interface ReqBoards {nextCursor:string}
-export interface ResBoards extends ResponseCommon<{posts:any[], nextCursor:number}>{}
+export interface ReqCreateBoard {}
+export interface ResCreateBoard extends ResponseCommon<{}>{}
 
-export interface ReqBoards {}
-export interface ResBoards {}
-
-export interface ReqBoards {}
-export interface ResBoards {}
-
-// export async function getBoard(data: ReqSendEmail) {
-//   return await useCustomFetch<ResSendEmail>("/signup/send-email", {
-//     method: "POST",
-//     body: data,
-//   });
-// }
-// export async function addBoard(data: ReqCheckEmail) {
-//   return await useCustomFetch<ResCheckEmail>("/signup/check-email", {
-//     method: "POST",
-//     body: data,
-//   });
-// }
-// export async function deleeteBoard(data: ReqCheckUserName) {
-//   return await useCustomFetch<ResCheckUserName>("/signup/check-username", {
-//     method: "POST",
-//     body: data,
-//   });
-// }
+export interface ReqDeleteBoard {}
+export interface ResDeleteBoard extends ResponseCommon<{}>{}

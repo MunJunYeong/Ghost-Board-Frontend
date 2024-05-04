@@ -30,19 +30,20 @@ const { data: board } = await useCustomFetch<{
 }>("/boards", {});
 const { data: post } = await useCustomFetch<{
   data: {
-    posts: { title: string; content: string; author: string }[];
+    posts: { title: string; content: string; author: string, File: any }[];
     nextCursor: number;
   };
   message: any;
 }>("/boards/1/posts", {});
 
+console.log(post)
 let nextCursor = ref(post.value?.data.nextCursor!);
 let postList = ref(post.value?.data.posts!);
 
 async function loadData() {
-  const { data: post } = await getBoards({nextCursor: nextCursor.value})
-  console.log(post,'postpost')
-  console.log(post.value?.data.nextCursor,'akldsj;lask;djaklsdj')
+  const { data: post } = await getPostList({boardId: 1 ,nextCursor: nextCursor.value})
+  // console.log(post,'postpost')
+  // console.log(post.value?.data.nextCursor,'akldsj;lask;djaklsdj')
   nextCursor.value = post.value?.data.nextCursor!;
   postList.value = [...postList.value, ...post.value?.data.posts!];
 }
@@ -61,7 +62,7 @@ async function loadData() {
             v-bind:key="i"
             v-for="(post, i) in postList"
             class="flex flex-col gap-2 border"
-          >
+          > <NuxtImg :ref="post.File.link">{{ post.File }}</NuxtImg>
             <div>{{ post.title }}</div>
             <div>{{ post.content }}</div>
             <div>{{ post.author }}</div>

@@ -1,30 +1,47 @@
-import type { ReqBoards, ResBoards } from "types/board";
+import type {
+  ReqCreatePost,
+  ReqDeletePost,
+  ReqGetPost,
+  ReqGetPostList,
+  ResCreatePost,
+  ResDeletePost,
+  ResGetPost,
+  ResGetPostList,
+} from "types/post";
 
-export async function getBoards(data: ReqBoards) {
+export async function getPostList(data: ReqGetPostList) {
   let params;
   if (data.nextCursor) {
     params = new URLSearchParams({ postId: data.nextCursor.toString() });
-    console.log(params.toString());
   }
 
-  return await useCustomFetch<ResBoards>(
-    `/boards/1/posts${params ? `?${params.toString()}` : ""}`
+  return await useCustomFetch<ResGetPostList>(
+    `/boards/${data.boardId}/posts${params ? `?${params.toString()}` : ""}`
   );
 }
-export async function getBoard(data: ReqBoards) {
-  return await useCustomFetch<ReqBoards>("/signup/send-email", {
+
+export async function getPost(data: ReqGetPost) {
+  return await useCustomFetch<ResGetPost>(
+    `/boards/${data.boardId}/posts/${data.postId}`
+  );
+}
+
+// 사진 전송할려면 헤더 바꿔야함.
+export async function createPost(data: ReqCreatePost) {
+  const test = new FormData();
+  test.append("title", data.body.title);
+  test.append("content", data.body.content);
+  test.append("image", data.body.image);
+  return await useCustomFetch<ResCreatePost>(`/boards/${data.boardId}/posts`, {
     method: "POST",
-    body: data,
+    body: test,
+    // headers: {
+    //   "Content-Type": "multipart/form-data",
+    // },
   });
 }
-export async function addBoard(data: ReqBoards) {
-  return await useCustomFetch<ReqBoards>("/signup/check-email", {
-    method: "POST",
-    body: data,
-  });
-}
-export async function deleeteBoard(data: ReqBoards) {
-  return await useCustomFetch<ReqBoards>("/signup/check-username", {
+export async function deletePost(data: ReqDeletePost) {
+  return await useCustomFetch<ResDeletePost>("/signup/check-username", {
     method: "POST",
     body: data,
   });
