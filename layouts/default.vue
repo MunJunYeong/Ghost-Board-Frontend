@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white h-screen w-screen flex flex-col">
+  <div class="bg-white flex min-h-screen flex-col">
     <div class="w-full flex shadow-lg py-3 px-4">
       <NuxtLink to="/"
         ><NuxtImg class="w-40" src="/logo.svg"></NuxtImg
@@ -18,24 +18,29 @@
         />
       </div>
 
-      <USlideover v-model="isOpen">
-        <div class="p-4 flex-1 flex flex-col">
-          <UVerticalNavigation
-            :ui="{
-              active: 'dark:before:!bg-emerald-300',
-              inactive: 'dark:hover:before:!bg-emerald-300/50',
-            }"
-            :links="isLoggedIn ? loggedInMenu : notLoggedInMenu"
-          >
-            <template #default="{ link }">
-              <span class="text-2xl font-bold relative">{{ link.label }}</span>
-            </template>
-          </UVerticalNavigation>
-        </div>
-      </USlideover>
     </div>
-    <slot class="flex-1"></slot>
+    <UMain class="flex-1 h-full flex">
+      <slot />
+    </UMain>
+    <!-- <div class="flex-1 h-full">
+      <slot class="h-full"></slot>
+    </div> -->
   </div>
+  <USlideover v-model="isOpen">
+    <div class="p-4 flex-1 flex flex-col">
+      <UVerticalNavigation
+        :ui="{
+          active: 'dark:before:!bg-emerald-300',
+          inactive: 'dark:hover:before:!bg-emerald-300/50',
+        }"
+        :links="accessToken ? loggedInMenu : notLoggedInMenu"
+      >
+        <template #default="{ link }">
+          <span class="text-2xl font-bold relative">{{ link.label }}</span>
+        </template>
+      </UVerticalNavigation>
+    </div>
+  </USlideover>
 </template>
 
 <script setup lang="ts">
@@ -57,14 +62,13 @@ const notLoggedInMenu = [
 const loggedInMenu = [
   {
     label: "내 정보",
-    to: "/auth/login",
+    to: "/",
   },
   {
     label: "게시판",
     to: "/board/0/post",
   },
 ];
-
-const isLoggedIn = ref(true);
+const accessToken = useCookie('accessToken')
 const isOpen = ref(false);
 </script>
