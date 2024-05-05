@@ -1,78 +1,70 @@
 <template>
-  <!-- 반응형 추가 -->
-  <v-app dark>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <NuxtLink to="/" class="ml-8 w-40"><v-img src="/public/logo.svg"></v-img></NuxtLink>
-      <v-spacer></v-spacer>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-    </v-app-bar>
-    <v-main class="w-full h-full flex flex-col">
-      <v-container class='flex-1'>
-        <slot></slot>
-        
-      </v-container>
-      <div>&copy; {{ new Date().getFullYear() }}</div>
-    </v-main>
-    <v-navigation-drawer
-      location="right"
-      temporary
-      :mini-variant="miniVariant"
-      v-model="drawer"
-      fixed
-      :clipped="clipped"
-    >
-      <v-list>
-        <!-- TODO: Nuxt link로 바꿀것 -->
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-          <v-spacer />
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-app>
+  <div class="bg-white h-screen w-screen flex flex-col">
+    <div class="w-full flex shadow-lg py-3 px-4">
+      <NuxtLink to="/"
+        ><NuxtImg class="w-40" src="/logo.svg"></NuxtImg
+      ></NuxtLink>
+      <div class="flex-1" />
+
+      <div class="mr-4 flex items-center">
+        <UButton
+          icon="i-heroicons-bars-3"
+          class="p-0"
+          size="xl"
+          color="black"
+          square
+          @click="isOpen = true"
+          variant="ghost"
+        />
+      </div>
+
+      <USlideover v-model="isOpen">
+        <div class="p-4 flex-1 flex flex-col">
+          <UVerticalNavigation
+            :ui="{
+              active: 'dark:before:!bg-emerald-300',
+              inactive: 'dark:hover:before:!bg-emerald-300/50',
+            }"
+            :links="isLoggedIn ? loggedInMenu : notLoggedInMenu"
+          >
+            <template #default="{ link }">
+              <span class="text-2xl font-bold relative">{{ link.label }}</span>
+            </template>
+          </UVerticalNavigation>
+        </div>
+      </USlideover>
+    </div>
+    <slot class="flex-1"></slot>
+  </div>
 </template>
 
-<script>
-export default {
-  name: "DefaultLayout",
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: true,
-      items: [
-        {
-          icon: "mdi-login",
-          title: "로그인",
-          to: "/auth/login",
-        },
-        {
-          icon: "mdi-account",
-          title: "회원가입",
-          to: "/auth/signup",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Board",
-          to: "/board/0/post",
-        },
-      ],
-      miniVariant: false,
-      right: false,
-      rightDrawer: false,
-      title: "Core 실록",
-    };
+<script setup lang="ts">
+const notLoggedInMenu = [
+  {
+    label: "로그인",
+    to: "/auth/login",
   },
-};
+  {
+    label: "회원가입",
+    to: "/auth/signup",
+  },
+  {
+    label: "ID / PW 찾기",
+    to: "/auth/find",
+  },
+];
+
+const loggedInMenu = [
+  {
+    label: "내 정보",
+    to: "/auth/login",
+  },
+  {
+    label: "게시판",
+    to: "/board/0/post",
+  },
+];
+
+const isLoggedIn = ref(true);
+const isOpen = ref(false);
 </script>
