@@ -1,13 +1,21 @@
 import type {
+  ReqChangePw,
   ReqCheckEmail,
+  ReqCheckFindPwEmail,
   ReqCheckUserName,
+  ReqFindId,
   ReqLogin,
   ReqSendEmail,
+  ReqSendFindPwEmail,
   ReqSignup,
+  ResChangePw,
   ResCheckEmail,
+  ResCheckFindPwEmail,
   ResCheckUserName,
+  ResFindId,
   ResLogin,
   ResSendEmail,
+  ResSendFindPwEmail,
   ResSignup,
 } from "types/auth";
 
@@ -37,6 +45,30 @@ export async function useCheckUserName(data: ReqCheckUserName) {
 }
 export async function useSignup(data: ReqSignup) {
   return await useCustomFetch<ResSignup>("/signup", {
+    method: "POST",
+    body: data,
+  });
+}
+export async function findUserId(data: ReqFindId) {
+  return await useCustomFetch<ResFindId>("/find-id/send-email", {
+    method: "POST",
+    body: data,
+  });
+}
+export async function sendFindPwEmail(data: ReqSendFindPwEmail) {
+  return await useCustomFetch<ResSendFindPwEmail>("/change-password/send-email", {
+    method: "POST",
+    body: data,
+  });
+}
+export async function checkFindPwEmail(data: ReqCheckFindPwEmail) {
+  return await useCustomFetch<ResCheckFindPwEmail>("/change-password/check-email", {
+    method: "POST",
+    body: data,
+  });
+}
+export async function changePw(data: ReqChangePw) {
+  return await useCustomFetch<ResChangePw>("/change-password", {
     method: "POST",
     body: data,
   });

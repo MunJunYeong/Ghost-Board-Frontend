@@ -17,7 +17,6 @@
           variant="ghost"
         />
       </div>
-
     </div>
     <UMain class="flex-1 h-full flex">
       <slot />
@@ -27,19 +26,35 @@
     </div> -->
   </div>
   <USlideover v-model="isOpen">
-    <div class="p-4 flex-1 flex flex-col">
-      <UVerticalNavigation
-        :ui="{
-          active: 'dark:before:!bg-emerald-300',
-          inactive: 'dark:hover:before:!bg-emerald-300/50',
-        }"
-        :links="accessToken ? loggedInMenu : notLoggedInMenu"
-      >
-        <template #default="{ link }">
-          <span class="text-2xl font-bold relative">{{ link.label }}</span>
-        </template>
-      </UVerticalNavigation>
-    </div>
+    <UCard
+      class="flex flex-col flex-1"
+      :ui="{
+        body: { base: 'flex-1' },
+        ring: '',
+        divide: 'divide-y divide-gray-100 dark:divide-gray-300',
+      }"
+    >
+      <template #header>
+        <div class='text-2xl font-bold text-gray-500'>메뉴</div>
+      </template>
+
+      <div class="p-4 flex-1 flex flex-col">
+        <UVerticalNavigation
+          :ui="{
+            active: 'dark:before:!bg-emerald-300',
+            inactive: 'dark:hover:before:!bg-emerald-300/50',
+          }"
+          :links="accessToken ? loggedInMenu : notLoggedInMenu"
+        >
+          <template #default="{ link }">
+            <span class="text-2xl font-bold relative">{{ link.label }}</span>
+          </template>
+        </UVerticalNavigation>
+      </div>
+      <template #footer>
+        <Placeholder class="h-full" />
+      </template>
+    </UCard>
   </USlideover>
 </template>
 
@@ -69,6 +84,6 @@ const loggedInMenu = [
     to: "/board/0/post",
   },
 ];
-const accessToken = useCookie('accessToken')
+const accessToken = useCookie("accessToken");
 const isOpen = ref(false);
 </script>
