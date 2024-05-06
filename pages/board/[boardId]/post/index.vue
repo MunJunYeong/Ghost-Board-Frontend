@@ -30,7 +30,7 @@ const { data: board } = await useCustomFetch<{
 }>("/boards", {});
 const { data: post } = await useCustomFetch<{
   data: {
-    posts: { title: string; content: string; author: string, File: any }[];
+    posts: { title: string; content: string; author: string; File: any }[];
     nextCursor: number;
   };
   message: any;
@@ -40,7 +40,10 @@ let nextCursor = ref(post.value?.data.nextCursor!);
 let postList = ref(post.value?.data.posts!);
 
 async function loadData() {
-  const { data: post } = await getPostList({boardId: 1 ,nextCursor: nextCursor.value})
+  const { data: post } = await getPostList({
+    boardId: 1,
+    nextCursor: nextCursor.value,
+  });
   nextCursor.value = post.value?.data.nextCursor!;
   postList.value = [...postList.value, ...post.value?.data.posts!];
 }
@@ -48,22 +51,31 @@ async function loadData() {
 
 <template>
   <section
-    class="w-full h-full items-center justify-center justify-items-center flex"
+    class="w-full items-center justify-center justify-items-center flex flex-col"
   >
-    <div class="flex flex-col gap-2">
-      <div class="text-4xl font-bold w-full text-center">보드</div>
-      post:result
-
+    <div class=" flex flex-col gap-2 mt-20 w-full max-w-[800px] overflow-y-auto">
+      <div class="text-4xl font-bold flex w-full justify-between">
+        게시판
+        <div>
+          <button
+            class="text-base font-normal text-white bg-emerald-300 rounded-md p-2"
+          >
+            <NuxtLink to="/board/0/post/create">작성</NuxtLink>
+          </button>
+        </div>
+      </div>
+      <hr class="my-4" />
       <div class="grid grid-cols-2 gap-2">
-          <div
-            v-bind:key="i"
-            v-for="(post, i) in postList"
-            class="flex flex-col gap-2 border"
-          > <NuxtImg :ref="post.File.link">{{ post.File }}</NuxtImg>
-            <div>{{ post.title }}</div>
-            <div>{{ post.content }}</div>
-            <div>{{ post.author }}</div>
-          </div>
+        <div
+          v-bind:key="i"
+          v-for="(post, i) in postList"
+          class="flex flex-col gap-2 border"
+        >
+          <NuxtImg v-if="post.File" :src="post.File?.link" />
+          <div>{{ post.title }}</div>
+          <div>{{ post.content }}</div>
+          <div>{{ post.author }}</div>
+        </div>
       </div>
 
       <InfiniteLoading @infinite="loadData" />

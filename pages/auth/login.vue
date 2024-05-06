@@ -22,15 +22,15 @@ async function onClick() {
 }
 </script>
 
-<template>
+<template >
   <section
-    class=" w-full h-full items-center justify-center justify-items-center flex flex-col"
+    class="my-auto w-full h-full items-center justify-center justify-items-center flex flex-col"
   >
     <form
       v-on:submit.prevent="() => onClick()"
       class="w-80 flex flex-col gap-2 relative"
     >
-      <div class="text-4xl font-bold w-full text-center">로그인</div>
+      <div class="text-4xl mb-8 font-bold w-full text-center">로그인</div>
       <input
         v-model="id"
         placeholder="id"

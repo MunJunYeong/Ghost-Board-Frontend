@@ -17,6 +17,7 @@ export async function useCustomFetch<T>(
     // 에러처리 로직 추가
     onResponseError({ response }) {
       if (response.status === 401) {
+        userAuth.value=''
         return navigateTo("/");
       }
     },
