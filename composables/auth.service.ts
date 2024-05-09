@@ -13,11 +13,18 @@ import type {
   ResCheckFindPwEmail,
   ResCheckUserName,
   ResFindId,
+  ResGoogleLoginURL,
   ResLogin,
   ResSendEmail,
   ResSendFindPwEmail,
   ResSignup,
 } from "types/auth";
+
+export async function useGoogleLogin() {
+  return await useCustomFetch<ResGoogleLoginURL>("/google-login", {
+    method: "GET",
+  });
+}
 
 export async function useLogin(data: ReqLogin) {
   return await useCustomFetch<ResLogin>("/login", {
@@ -25,6 +32,7 @@ export async function useLogin(data: ReqLogin) {
     body: data,
   });
 }
+
 export async function useSendEmail(data: ReqSendEmail) {
   return await useCustomFetch<ResSendEmail>("/signup/send-email", {
     method: "POST",
