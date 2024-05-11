@@ -14,10 +14,10 @@ export async function useCustomFetch<T>(
         options.headers = { Authorization: `Bearer ${userAuth.value}` };
       }
     },
-    // 에러처리 로직 추가
-    onResponseError({ response }) {
+    onResponseError({ request, response }) {
+      // refresh 로직 추가
       if (response.status === 401) {
-        userAuth.value=''
+        userAuth.value = "";
         return navigateTo("/");
       }
     },

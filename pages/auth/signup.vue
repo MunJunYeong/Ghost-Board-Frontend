@@ -24,7 +24,7 @@ async function checkUserName() {
 }
 
 async function sendEmail() {
-  const { data, error, pending } = await useSendEmail({ email });
+  const { data, error } = await useSendEmail({ email });
   // 알림 띄워주는 작업 추가해야 함.
   if (data.value) {
     isSendingMail.value = false;
@@ -66,7 +66,7 @@ async function Signup() {
 
 <template>
   <section
-    class="w-full h-full items-center justify-center justify-items-center flex"
+    class="my-auto w-full h-full items-center justify-center justify-items-center flex"
   >
     <!-- 이걸 통채로 컴포넌트로 나눌지 고민 -->
     <form v-on:submit.prevent="() => Signup()" class="w-80 flex flex-col gap-2">
@@ -108,7 +108,7 @@ async function Signup() {
           :text="isMailSend ? '✅전송' : '전송'"
         ></ButtonBasic>
       </div>
-      <div :v-if="isMailSend" class="flex w-full justify-between gap-2">
+      <div v-if="isMailSend" class="flex w-full justify-between gap-2">
         <input
           v-model="code"
           placeholder="code"

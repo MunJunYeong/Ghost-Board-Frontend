@@ -15,7 +15,6 @@
   </template>
   
   <script setup lang="ts">
-  import { ref, defineProps } from 'vue';
   
   interface InputFormProps {
     value: string;
