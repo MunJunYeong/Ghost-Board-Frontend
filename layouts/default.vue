@@ -18,9 +18,9 @@
         />
       </div>
     </div>
-    <UMain class="flex-1 h-full flex">
+    <div class="flex-1 h-full flex">
       <slot />
-    </UMain>
+    </div>
     <!-- <div class="flex-1 h-full">
       <slot class="h-full"></slot>
     </div> -->
@@ -51,9 +51,6 @@
           </template>
         </UVerticalNavigation>
       </div>
-      <template #footer>
-        <Placeholder class="h-full" />
-      </template>
     </UCard>
   </USlideover>
 </template>

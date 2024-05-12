@@ -11,7 +11,7 @@ function onDrop(item: any) {
 
 async function CreatePost() {
   const { data, error } = await createPost({
-    body: { content, title, image },
+    body: { content, title, image, isAnonymous: "true" },
     boardId: 1,
   });
   if (data.value) {
