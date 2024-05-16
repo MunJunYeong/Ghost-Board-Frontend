@@ -44,5 +44,20 @@ export interface ReqCreatePost {
 }
 export interface ResCreatePost extends ResponseCommon<{}> {}
 
-export interface ReqDeletePost {}
+export interface ReqDeletePost {
+  boardId: number;
+  postId: number;
+}
 export interface ResDeletePost extends ResponseCommon<{}> {}
+
+export interface ReqUpdatePost {
+  boardId: number;
+  postId: number;
+  body: {
+    content: string;
+    title: string;
+    image: File;
+    isAnonymous: string;
+  };
+}
+export interface ResUpdatePost extends ResponseCommon<{}> {}

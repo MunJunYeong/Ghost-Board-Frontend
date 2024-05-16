@@ -1,7 +1,8 @@
 export default defineNuxtRouteMiddleware((to) => {
+    const router = useRouter();
     const accessToken = useCookie("accessToken")
     if (!accessToken.value) {
-        return navigateTo("/login");
+        return router.push({ path: "/login" });
     }
     return 
   })
