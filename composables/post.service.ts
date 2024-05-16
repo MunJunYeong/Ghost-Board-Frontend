@@ -32,6 +32,7 @@ export async function createPost(data: ReqCreatePost) {
   test.append("title", data.body.title);
   test.append("content", data.body.content);
   test.append("image", data.body.image);
+  test.append("isAnonymous", data.body.isAnonymous);
   return await useCustomFetch<ResCreatePost>(`/boards/${data.boardId}/posts`, {
     method: "POST",
     body: test,

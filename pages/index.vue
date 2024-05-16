@@ -1,17 +1,18 @@
 <template>
-    <section>
-      <p class="text-red-500">TODO: This page is main page.</p>
-      <button v-on:click="logOut">로그아웃</button>
-    </section>
-  </template>
+  <section>
+    <p class="text-red-500">TODO: This page is main page.</p>
+    <button v-on:click="logOut">로그아웃</button>
+  </section>
+</template>
 
 <script setup lang="ts">
-const cookie = useCookie('accessToken')
+const accessToken = useCookie("accessToken");
+const refreshToken = useCookie("refreshToken");
+
 function logOut() {
-  cookie.value =null
+  accessToken.value = null;
+  refreshToken.value = null;
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

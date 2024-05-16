@@ -1,13 +1,14 @@
 <script setup lang="ts">
 let username: string;
 let email: string;
+let errorMessage = ref("");
 
 async function onClick() {
   const { data } = await findUserId({ username, email });
   // TODO: 성공했을 떄 어떻게 할지
   if (data.value) {
-    console.log('성공')
-    return 
+    console.log("성공");
+    return;
   }
 }
 </script>
@@ -37,10 +38,11 @@ async function onClick() {
           type="submit"
           :onClick="() => onClick()"
           text="찾기"
-          :fullWidth=true
+          :fullWidth="true"
         ></ButtonBasic>
       </div>
-      
+      <!-- Error 알림 -->
+      <ErrorAlert :description="errorMessage" />
     </form>
   </section>
 </template>

@@ -9,6 +9,7 @@ let isCheckedUsername = ref(false);
 let isCheckedEmail = ref(false);
 let errorMessage = ref("");
 let isSendingMail = ref(false);
+
 async function checkUserName() {
   const { data, error } = await useCheckUserName({ username });
   if (data.value) {
@@ -55,7 +56,7 @@ async function checkEmail() {
 async function Signup() {
   const { data, error } = await useSignup({ id, email, password, username });
   if (data.value) {
-    return navigateTo("/");
+    return navigateTo("/auth/login");
   }
   if (error.value) {
     errorMessage.value = error.value.data.message;
