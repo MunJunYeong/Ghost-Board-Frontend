@@ -20,6 +20,15 @@ async function onClick() {
     return;
   }
 }
+
+async function googleLogin() {
+  // useLogin 함수를 사용하여 로그인 시도
+  const { data, error } = await useGoogleLogin();
+
+  if (data.value) {
+    window.location.href = data.value.data.url;
+  }
+}
 </script>
 
 <template>
@@ -55,7 +64,10 @@ async function onClick() {
         ></ButtonBasic>
       </div>
       <div class="flex h-12">
-        <ButtonGoogleAuth text="login"></ButtonGoogleAuth>
+        <ButtonGoogleAuth
+          :onClick="() => googleLogin()"
+          :fullWidth="true"
+        ></ButtonGoogleAuth>
       </div>
       <!-- Error 알림 -->
       <ErrorAlert :description="errorMessage" />

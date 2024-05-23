@@ -12,6 +12,10 @@ export interface ResLogin extends ResponseCommon<{
   refreshToken: string;
 }> {}
 
+export interface ResGoogleLoginURL extends ResponseCommon<{
+  url: string;
+}> {}
+
 // send email
 export interface ReqSendEmail {
   email: string;

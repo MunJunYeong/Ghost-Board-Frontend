@@ -1,17 +1,21 @@
 <template>
-    <button class="button w-full h-full rounded-lg border">
-        Google Auth
-    </button>
+  <button
+    type="button"
+    v-on:click="onClick"
+    class="bg-slate-900 text-white py-2 px-2 rounded-md text-center"
+    :class="{ 'w-full': fullWidth }"
+  >
+    GoogleAuth
+  </button>
 </template>
 
-<script>
-    export default {
-        props: {
-            text: String,
-            onClick: Function
-        }
-    }
-</script>
+<script setup lang="ts">
+import { defineProps } from "vue";
 
-<style scoped>
-</style>
+defineProps({
+  onClick: Function,
+  fullWidth: { type: Boolean, default: false },
+});
+
+const emit = defineEmits(["click"]);
+</script>
