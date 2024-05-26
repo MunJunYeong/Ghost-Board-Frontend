@@ -24,7 +24,7 @@ export interface ReqCreateComment {
   boardId: number;
   postId: number;
   body: {
-    parentCommentId: number;
+    parentCommentId: number | null;
     content: string;
     isAnonymous: boolean;
   };

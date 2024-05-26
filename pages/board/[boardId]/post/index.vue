@@ -24,12 +24,6 @@ definePageMeta({
 //   }
 // );
 
-// TODO: data fetch 하는 부분 composable 함수 작성해야함.
-const { data: board } = await useCustomFetch<{
-  data: { posts: { title: string; contents: string }[] };
-  message: any;
-}>("/boards", {});
-
 const { data: post } = await getPostList({
   boardId:1,
 })
