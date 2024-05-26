@@ -1,14 +1,13 @@
 import type { UseFetchOptions } from "nuxt/app";
 
-const accessToken = useCookie("accessToken");
-const refreshToken = useCookie("refreshToken");
-const config = useRuntimeConfig();
-const router = useRouter();
-
 export async function useCustomFetch<T>(
   url: string | (() => string),
   options: UseFetchOptions<T> = {}
 ) {
+  const accessToken = useCookie("accessToken");
+  const refreshToken = useCookie("refreshToken");
+  const config = useRuntimeConfig();
+  const router = useRouter();
   const customFetch = $fetch.create({
     baseURL: config.public.apiBase ?? "https://api.nuxt.com",
     retryStatusCodes: [401],
@@ -37,6 +36,10 @@ export async function useCustomFetch<T>(
 }
 
 async function refreshAccessToken() {
+  const accessToken = useCookie("accessToken");
+  const refreshToken = useCookie("refreshToken");
+  const config = useRuntimeConfig();
+  const router = useRouter();
   if (refreshToken.value) {
     const refreshOptions: UseFetchOptions<{
       data: { accessToken: string };

@@ -7,9 +7,6 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
 
-  build: {
-    transpile: ["vuetify"],
-  },
 
   modules: [
     "@nuxt/eslint",
