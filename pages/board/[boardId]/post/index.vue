@@ -25,12 +25,11 @@ definePageMeta({
 // );
 
 const { data: post } = await getPostList({
-  boardId:1,
-})
+  boardId: 1,
+});
 
 let nextCursor = ref(post.value?.data.nextCursor!);
 let postList = ref(post.value?.data.posts!);
-
 async function loadData() {
   const { data: post } = await getPostList({
     boardId: 1,
@@ -39,6 +38,16 @@ async function loadData() {
   if (post.value) {
     nextCursor.value = post.value?.data.nextCursor;
     postList.value = [...postList.value, ...post.value.data.posts];
+  }
+}
+
+async function likePost(postId: number) {
+  const { data } = await createPostLike({
+    postId: postId,
+    boardId: 1,
+  });
+  if (data.value) {
+    console.log("이게 되네");
   }
 }
 </script>
@@ -54,7 +63,7 @@ async function loadData() {
           <button
             class="text-base font-normal text-white bg-emerald-300 rounded-md p-2"
           >
-            <NuxtLink to="/board/0/post/create">작성</NuxtLink>
+            <NuxtLink to="/board/1/post/create">작성</NuxtLink>
           </button>
         </div>
       </div>
@@ -66,11 +75,30 @@ async function loadData() {
           v-for="(post, i) in postList"
           class="flex flex-col gap-2 border"
         >
-          <NuxtLink :to="`/board/0/post/${post.postId.toString()}`" class="flex flex-col gap-2 border">
+          <NuxtLink
+            :to="`/board/1/post/${post.postId.toString()}`"
+            class="flex flex-col gap-2 border"
+          >
             <NuxtImg v-if="post.File" :src="post.File?.link" />
             <div>{{ post.title }}</div>
             <div>{{ post.content }}</div>
             <div>{{ post.author }}</div>
+            <button
+              :onclick="
+                (e) => {
+                  e.preventDefault();
+                  likePost(post.postId);
+                }
+              "
+            >
+              <div class="text-pink-500 text-2xl flex justify-start">
+                <UIcon name="i-mdi-heart" />
+                <UIcon name="i-mdi-heart-outline" />
+              </div>
+              <div class="text-red-500 text-2xl flex justify-start">
+                <UIcon name="i-mdi-information-box" />
+              </div>
+            </button>
           </NuxtLink>
         </div>
       </div>

@@ -371,6 +371,13 @@
   dependencies:
     "@iconify/utils" "^2.1.20"
 
+"@egoist/tailwindcss-icons@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@egoist/tailwindcss-icons/-/tailwindcss-icons-1.8.0.tgz#923b07972c4c8d619010678416251f108d08647a"
+  integrity sha512-75LfllKL2lq0sGH+wcpsn/sLtJ0kMkDWmcZTLAB76QLDTmfsFu4QHwZVbtCD2woGyKl9c8KvtOUW9JSjRqOVtA==
+  dependencies:
+    "@iconify/utils" "^2.1.23"
+
 "@es-joy/jsdoccomment@~0.42.0":
   version "0.42.0"
   resolved "https://registry.yarnpkg.com/@es-joy/jsdoccomment/-/jsdoccomment-0.42.0.tgz#59e878708336aaee88c2b34c894f73dbf77ae2b0"
@@ -611,12 +618,20 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify/json@^2.2.213":
+  version "2.2.213"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-2.2.213.tgz#b22a0a55b92e9d0cb347bc14299d15a1649889f0"
+  integrity sha512-5tcEn+ZDoWlBXmlJidYjMsJyFXhXuVscbg7PRpaon86GqrDlwW/cl8mR682C06Oq4AfeypmfVI18YTnczwdqxA==
+  dependencies:
+    "@iconify/types" "*"
+    pathe "^1.1.2"
+
 "@iconify/types@*", "@iconify/types@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
   integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
 
-"@iconify/utils@^2.1.20":
+"@iconify/utils@^2.1.20", "@iconify/utils@^2.1.23":
   version "2.1.23"
   resolved "https://registry.yarnpkg.com/@iconify/utils/-/utils-2.1.23.tgz#1cde237dd5142a66d9fbd065b2fa7acc4f80f862"
   integrity sha512-YGNbHKM5tyDvdWZ92y2mIkrfvm5Fvhe6WJSkWu7vvOFhMtYDP0casZpoRz0XEHZCrYsR4stdGT3cZ52yp5qZdQ==

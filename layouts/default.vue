@@ -78,7 +78,7 @@ const loggedInMenu = [
   },
   {
     label: "게시판",
-    to: "/board/0/post",
+    to: "/board/1/post",
   },
 ];
 const accessToken = useCookie("accessToken");

@@ -32,7 +32,7 @@ async function addComment() {
   if (data.value) {
     await refresh();
     commentList.value = comments.value?.data;
-    content=''
+    content = "";
     return;
   }
   // TODO: 에러메시지 user 친화적인 문구로 변경 필요
