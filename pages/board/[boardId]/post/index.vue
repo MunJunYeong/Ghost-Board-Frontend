@@ -50,6 +50,15 @@ async function likePost(postId: number) {
     console.log("이게 되네");
   }
 }
+async function unLikePost(postId: number) {
+  const { data } = await deletePostLike({
+    postId: postId,
+    boardId: 1,
+  });
+  if (data.value) {
+    console.log("이게 되네");
+  }
+}
 </script>
 
 <template>
@@ -73,32 +82,50 @@ async function likePost(postId: number) {
         <div
           v-bind:key="i"
           v-for="(post, i) in postList"
-          class="flex flex-col gap-2 border"
+          class="flex flex-col gap-2"
         >
           <NuxtLink
             :to="`/board/1/post/${post.postId.toString()}`"
-            class="flex flex-col gap-2 border"
+            class="flex flex-col gap-2 border rounded-md p-1 h-full justify-between"
           >
-            <NuxtImg v-if="post.File" :src="post.File?.link" />
-            <div>{{ post.title }}</div>
-            <div>{{ post.content }}</div>
-            <div>{{ post.author }}</div>
-            <button
-              :onclick="
-                (e) => {
-                  e.preventDefault();
-                  likePost(post.postId);
-                }
-              "
-            >
+            <div class="flex flex-col h-full">
+              <div class="font-bold text-xl">{{ post.title }}</div>
+              <hr class="my-2" />
+              <div class="flex justify-center flex-1 h-40">
+                <NuxtImg class="h-40" v-if="post.File" :src="post.File?.link" />
+                <div class="h-40" v-if="!post.File" />
+              </div>
+              <hr class="my-2" />
+              <div>{{ post.content }}</div>
+              <div class="!text-gray-400 text-xs">{{ post.author }}</div>
+            </div>
+
+            <div class="">
               <div class="text-pink-500 text-2xl flex justify-start">
-                <UIcon name="i-mdi-heart" />
-                <UIcon name="i-mdi-heart-outline" />
+                <button
+                  :onclick="
+                    async (e) => {
+                      e.preventDefault();
+                      await likePost(post.postId);
+                    }
+                  "
+                >
+                  <UIcon name="i-mdi-heart" />
+                </button>
+                <button
+                  :onclick="
+                    async (e) => {
+                      e.preventDefault();
+                      await unLikePost(post.postId);
+                    }
+                  "
+                >
+                  <UIcon name="i-mdi-heart-outline" />
+                </button>
+                <div class="flex-1" />
+                <DialogReport />
               </div>
-              <div class="text-red-500 text-2xl flex justify-start">
-                <UIcon name="i-mdi-information-box" />
-              </div>
-            </button>
+            </div>
           </NuxtLink>
         </div>
       </div>

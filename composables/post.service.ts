@@ -55,12 +55,23 @@ export async function deletePost(data: PostTypes.ReqDeletePost) {
     }
   );
 }
+
 // Like Post
 export async function createPostLike(data: PostTypes.ReqLikePost) {
   return await useCustomFetch<PostTypes.ResLikePost>(
     `/boards/${data.boardId}/posts/${data.postId}/like`,
     {
       method: "POST",
+    }
+  );
+}
+
+// Like Post
+export async function deletePostLike(data: PostTypes.ReqLikePost) {
+  return await useCustomFetch<PostTypes.ResLikePost>(
+    `/boards/${data.boardId}/posts/${data.postId}/like`,
+    {
+      method: "DELETE",
     }
   );
 }
