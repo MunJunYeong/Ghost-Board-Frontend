@@ -47,7 +47,8 @@ async function likePost(postId: number) {
     boardId: 1,
   });
   if (data.value) {
-    console.log("이게 되네");
+    // TODO: 성공시
+    console.log("sucess");
   }
 }
 async function unLikePost(postId: number) {
@@ -56,23 +57,22 @@ async function unLikePost(postId: number) {
     boardId: 1,
   });
   if (data.value) {
-    console.log("이게 되네");
+    // TODO: 성공시
+    console.log("sucess");
   }
 }
 </script>
 
 <template>
-  <section
-    class="w-full items-center justify-center justify-items-center flex flex-col"
-  >
-    <div class="flex flex-col gap-2 mt-20 w-full max-w-[800px] overflow-y-auto">
+   <section class="w-full items-center justify-items-center flex flex-col">
+    <div class="flex flex-col gap-2 mt-24 w-full max-w-[800px] overflow-y-auto">
       <div class="text-4xl font-bold flex w-full justify-between">
         게시판
         <div>
           <button
             class="text-base font-normal text-white bg-emerald-300 rounded-md p-2"
           >
-            <NuxtLink to="/board/1/post/create">작성</NuxtLink>
+            <NuxtLink :to="`/board/${1}/post/create`">작성</NuxtLink>
           </button>
         </div>
       </div>

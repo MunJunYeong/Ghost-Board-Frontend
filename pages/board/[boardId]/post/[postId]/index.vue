@@ -40,13 +40,32 @@ async function addComment() {
     return;
   }
 }
+
+async function likePost(postId: number) {
+  const { data } = await createPostLike({
+    postId: postId,
+    boardId: 1,
+  });
+  if (data.value) {
+    // TODO: 성공시
+    console.log("sucess");
+  }
+}
+async function unLikePost(postId: number) {
+  const { data } = await deletePostLike({
+    postId: postId,
+    boardId: 1,
+  });
+  if (data.value) {
+    // TODO: 성공시
+    console.log("이게 되네");
+  }
+}
 </script>
 
 <template>
-  <section
-    class="w-full items-center justify-center justify-items-center flex flex-col"
-  >
-    <div class="flex flex-col gap-2 mt-20 w-full max-w-[800px] overflow-y-auto">
+  <section class="w-full items-center justify-items-center flex flex-col">
+    <div class="flex flex-col gap-2 mt-24 w-full max-w-[800px] overflow-y-auto ">
       <!-- Title -->
       <div class="text-4xl font-bold flex w-full justify-between">
         {{ postDetail.data.content }}
@@ -59,7 +78,7 @@ async function addComment() {
           <button
             class="text-base font-normal text-white bg-emerald-300 rounded-md p-2"
           >
-            <NuxtLink to="/board/0/post/create">수정</NuxtLink>
+            <NuxtLink :to="`/board/${1}/post/create`">수정</NuxtLink>
           </button>
         </div>
       </div>
@@ -74,6 +93,35 @@ async function addComment() {
         <div class="w-full text-xl">{{ postDetail.data?.content }}</div>
       </div>
       <hr class="my-4" />
+      <div class="flex justify-between">
+
+        <div class="text-pink-500 text-2xl flex justify-start">
+          <button
+          class="flex"
+            :onclick="
+              async (e) => {
+                e.preventDefault();
+                await likePost(postDetail.data.postId);
+              }
+            "
+          >
+            <!-- TODO: api 연동 부분 수정 필요 -->
+            <UIcon name="i-mdi-heart" dynamic />
+            <div class="text-base font-bold">11</div>
+          </button>
+          <!-- <button
+            :onclick="
+              async (e) => {
+                e.preventDefault();
+                await unLikePost(postDetail.data.postId);
+              }
+            "
+          >
+            <UIcon name="i-mdi-heart-outline" dynamic/>
+          </button> -->
+        </div>
+        <DialogReport />
+      </div>
       <!-- Comment -->
       <div class="w-full p-1 flex flex-col gap-2">
         <h3 class="text-xl font-bold">댓글</h3>

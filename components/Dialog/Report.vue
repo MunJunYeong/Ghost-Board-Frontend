@@ -9,7 +9,7 @@ const isOpen = ref(false);
         e.preventDefault()
         isOpen = true
         }">
-        <UIcon name="i-mdi-information-box" />
+        <UIcon name="i-mdi-information-box" dynamic />
       </button>
     </div>
 
@@ -36,11 +36,6 @@ const isOpen = ref(false);
             />
           </div>
         </template>
-
-        <template #footer>
-          <Placeholder class="h-8" />
-        </template>
-
       </UCard>
     </UModal>
   </div>
