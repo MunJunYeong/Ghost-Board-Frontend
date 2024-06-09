@@ -16,7 +16,7 @@ async function CreatePost() {
     boardId: route.params.boardId,
   });
   if (data.value) {
-    return router.back()
+    return router.back();
   }
   if (error.value) {
     console.log("실패");
@@ -45,31 +45,49 @@ async function CreatePost() {
 
 <template>
   <section
-    class="w-full h-full items-center justify-center justify-items-center flex flex-col my-auto gap-2"
+    class="w-full h-full items-center justify-items-center flex flex-col gap-2"
   >
-    <div class="gap-2">
-      <div class="text-4xl font-bold w-full text-center">게시글 작성</div>
-    </div>
-    <hr class="my-4" />
-    <div class="flex flex-col gap-2">
-      <input type="text" class="border rounded-md" v-model="title" />
-      <textarea type="text" class="border rounded-md" v-model="content" />
-      <div>
-        <input
-          type="file"
-          :value="image"
-          ref="upload"
-          @input="onDrop($event)"
-        />
-      </div>
-
-      <div class="flex justify-end">
+    <div class="flex flex-col gap-2 mt-24 w-full max-w-[800px] overflow-y-auto">
+      <!-- Title -->
+      <div class="text-4xl font-bold flex w-full justify-between">
+        게시글 작성
         <button
           class="text-base font-normal text-white bg-emerald-300 rounded-md p-2"
-          :onclick="CreatePost"
         >
-          작성
+          <NuxtLink to="/board/1/post">뒤로</NuxtLink>
         </button>
+      </div>
+
+      <hr class="my-4" />
+
+      <div class="flex flex-col gap-2">
+        <div class="font-bold">제목</div>
+        <input type="text" class="border rounded-md mx-1 p-2" v-model="title" />
+
+        <div class="font-bold">내용</div>
+        <textarea
+          type="text"
+          class="rounded-md min-h-96 mx-1 border p-2"
+          v-model="content"
+        />
+        <div>
+          <input
+            class="rounded-md border w-full"
+            type="file"
+            :value="image"
+            ref="upload"
+            @input="onDrop($event)"
+          />
+        </div>
+
+        <div class="flex justify-end">
+          <button
+            class="text-base font-normal text-white bg-emerald-300 rounded-md p-2"
+            :onclick="CreatePost"
+          >
+            작성
+          </button>
+        </div>
       </div>
     </div>
   </section>
