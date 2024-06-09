@@ -61,3 +61,9 @@ export interface ReqUpdatePost {
   };
 }
 export interface ResUpdatePost extends ResponseCommon<{}> {}
+
+export interface ReqLikePost {
+  boardId: number;
+  postId: number;
+}
+export interface ResLikePost extends ResponseCommon<{}> {}

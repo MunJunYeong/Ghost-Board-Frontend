@@ -55,3 +55,49 @@ export async function deletePost(data: PostTypes.ReqDeletePost) {
     }
   );
 }
+
+// Like Post
+export async function createPostLike(data: PostTypes.ReqLikePost) {
+  return await useCustomFetch<PostTypes.ResLikePost>(
+    `/boards/${data.boardId}/posts/${data.postId}/like`,
+    {
+      method: "POST",
+    }
+  );
+}
+
+// Like Post
+export async function deletePostLike(data: PostTypes.ReqLikePost) {
+  return await useCustomFetch<PostTypes.ResLikePost>(
+    `/boards/${data.boardId}/posts/${data.postId}/like`,
+    {
+      method: "DELETE",
+    }
+  );
+}
+// // Delete Post
+// export async function deletePost(data: PostTypes.ReqDeletePost) {
+//   return await useCustomFetch<PostTypes.ResDeletePost>(
+//     `/boards/${data.boardId}/posts/${data.postId}`,
+//     {
+//       method: "DELETE",
+//     }
+//   );
+// }
+// // Delete Post
+// export async function deletePost(data: PostTypes.ReqDeletePost) {
+//   return await useCustomFetch<PostTypes.ResDeletePost>(
+//     `/boards/${data.boardId}/posts/${data.postId}`,
+//     {
+//       method: "DELETE",
+//     }
+//   );
+// }
+
+
+// 좋아요 API
+// export async function getPostLikes(`${prefix}/:postId/like`, this.controller.getPostLike);
+
+
+// this.router.post(`${prefix}/:postId/like`, this.controller.createPostLike);
+// this.router.delete(`${prefix}/:postId/like`, this.controller.deletePostLike);
